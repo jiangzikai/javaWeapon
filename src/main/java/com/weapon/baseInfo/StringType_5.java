@@ -22,6 +22,10 @@ public class StringType_5 {
 
         //2、equals()检测两个字符串是否相等
         //一定不能使用==运算符检测两个字符串是否相等。==运算符比较的是他们在内存中的存放地址，所以，除非是同一个new出来的对象，他们的比较后的结果为true，否则比较后结果为false。
+        //简单总结：
+        //a)、基本类型比较的都是值
+        //b)、引用类型(java类等)，==和equals比较的都是对象的内存地址。但是像String类，重新了equals方法，就变成了比较内容了。
+        //（比较两个字符串是否一样，用equals方法）
         String a1 = "Hello";
         String a2 = "Hello";
         if(a1.equals(a2)){
