@@ -22,6 +22,9 @@ public class BigDecimalDemo2_13 {
         System.out.println("a * b =" + a.multiply(b));//a * b =6.75
         System.out.println("a / b =" + a.divide(b));//a / b =3
 
+        //compareTo比较大小
+        System.out.println("比较大小："+a.compareTo(b));//相等为0，a>b正数，a<b负数
+
         //BigDecimal除法可能出现不能整除的情况，比如 4.5/1.3，这时会报错java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
         BigDecimal a1 = new BigDecimal("4.5");
         BigDecimal b1 = new BigDecimal("1.3");
