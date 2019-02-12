@@ -51,3 +51,13 @@
      *      final修饰常量，只能被赋值一次，赋值之后不能再更改了。常量名全大写
      *      static final 类常量
      */
+
+一、自动类型转换  大变量 = 小值
+
+                   chart
+                     |
+     byte—>short—>int —>lang
+                    |                                         |
+            float—>double
+
+二、强制类型转换  小值 =(小类型)大变量
