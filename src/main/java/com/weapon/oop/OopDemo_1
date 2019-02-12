@@ -1,0 +1,133 @@
+什么是OOP
+面向对象编程： oop（object oriented programming）面向对象编程
+
+面向过程：步骤
+面向对象：整体概念
+从总体上以面向对象分析和把握，从细节上以面向过程去解决。
+
+比如C 语言，是面向过程的语言，第一步需要干什么，第二部需要干什么
+Java是面向对象的语言。从总体上以面向对象分析和把握，从细节上以面向过程去解决。
+(一切皆为对象。活生生的实例)
+
+把同类型的对象进行类比，抽象出相同的特征和行为。就称为类。
+比如学生这个对象，相同的特征：学号、姓名、年龄；相同的行为：学习、吃饭。
+所以，类的组成为属性(相同的特征)和方法(相同的行为)。
+可以把类当作复杂的数据类型(数据+行为)
+类：对同类型对象的类比抽象。
+对象：类的一个实例。
+--------------------类与类的关系-------------------------------------------
+类与类的关系
+联系：
+依赖(偶然性、局部变量)
+关联(长期持有，属性)
+聚合(整体与部分，不具有生命周期的一致性、属性)
+组合(整体与部分，具有生命周期一致性、属性)
+继承 extends
+实现
+---------------------多态------------------------------------------
+polymorphism:模糊策略，运行期行为，以不变应万变
+一、多态
+1、前提: 继承 重写 父类型引用 指向子类型对象 -->运行期行为
+2、编译看类型 : 左边 ,从引用类向上追溯继承链-->Object ，找到编译通过，否则错误。
+运行找对象 : 右边 ,从对象所属的类 向上追溯继承链-->Object ，运行方法即可
+编译完成后: 确定调用的方法 确定了方法表
+3、一旦发生多态，对新增方法不可见
+注意调用 就近最优原则
+二、多态形式
+1、形参使用父类型
+2、返回类型使用父类型
+三、
+发生多态对新增方法不可见，使用新增方法，只能类型转换
+1、自动
+大范围 =小值;
+2、强制 () ClassCastException
+小类型 =(小类型)大值;
+发生多态才可以进行强制类型转换
+
+四、instanceof 避免ClassCastException 错误
+instanceof：判断引用所指向的对象是否为某类|某父类的实例
+注意:编译时检查是否存在继承关系，一定存在继承关系
+public class PolyDemo01 {
+public static void main(String[] args) {
+    Car car = new VW(); //此处发生多态。
+    //编译看类型(=左边)从引用所属的类向上追溯继承链。
+    //运行找对象(=右边)从对象所属的类向上追溯继承链。
+    car.run(); //编译通过。编译看类型(=左边，引用类向上追溯继承链)，Car这个类是有run()方法的
+    car.test(); //编译错误。编译看类型(=左边，引用类向上追溯继承链)，Car这个类没有test()方法的
+    //car.run() 结果是"大众车跑"。运行找对象(=右边)从对象所属的类向上追溯继承链。先找到的是VW()对象的run()。
+    //car.test() 编译通不过。所以：发生多态，对新增方法不可见。
+    }
+}
+class Car{
+    public void run(){
+        System. out.println( "概念车跑");
+    }
+}
+class BMW extends Car{
+    public void run(){
+        System. out.println( "宝马车跑");
+    }
+    public void test(){
+        System. out.println( "宝马车测试" );
+    }
+}
+class VW extends Car{
+    public void run(){
+        System. out.println( "大众车跑");
+    }
+    public void test(){
+        System. out.println( "大众车测试" );
+    }
+}
+---------------------多态使用形式-------------------------------------------
+/**
+多态形式
+1、形参使用父类型
+2、返回类型使用父类型
+*/
+public class PolyDemo02{
+    //多态
+    public static void testCar(Car car){
+        car.run();
+    }
+    public static void main(String[] args){
+        Car car =CarFactory. product("qq");
+        testCar(car);
+        car =CarFactory. product("ben");
+        testCar(car);
+    }
+}
+
+//生产车 -->简单工厂
+class CarFactory{
+    //返回类型使用父类型 一旦返回子对象发生多态
+    public static Car product(String type){
+    if(type.equals( "qq")){
+        return new Qq();
+    }else if(type.equals( "ben")){
+        return new Benz();
+    }
+        return new Car();
+    }
+}
+
+class Car{
+    public void run(){
+        System. out.println( "概念车如何奔跑...." );
+    }
+}
+
+//继承
+class Benz extends Car{
+    //重写
+    public void run(){
+        System. out.println( "奔驰跑....");
+    }
+}
+//继承
+class Qq extends Car{
+    //重写
+    public void run(){
+        System. out.println( "QQ跑....");
+    }
+}
