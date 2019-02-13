@@ -7,4 +7,5 @@ package com.weapon.oop;
  * @Description:
  */
 public class OopDemo_1 {
+    //详细见OopDemo_1的文档
 }
